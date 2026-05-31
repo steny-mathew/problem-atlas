@@ -1,16 +1,58 @@
-# React + Vite
+# ProblemAtlas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ProblemAtlas is an AI-powered platform that discovers, clusters, and ranks real-world problems people complain about online.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Every day, people post frustrations on Reddit, forums, app reviews, and social platforms.
 
-## React Compiler
+ProblemAtlas aims to automatically:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Detect complaints
+* Extract underlying problems
+* Group similar complaints together
+* Score opportunities based on frequency and growth
+* Help developers and founders discover problems worth solving
 
-## Expanding the ESLint configuration
+## Current Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Hero dashboard
+* Problem Pulse live ticker
+* Category filters
+* Problem cards
+* Opportunity scores
+* React frontend MVP
+
+## Tech Stack
+
+### Frontend
+
+* React
+* Vite
+* CSS
+
+### Planned Backend
+
+* Node.js
+* Express
+* MongoDB
+
+### Planned AI Layer
+
+* Python
+* OpenAI API
+* Sentence Transformers
+
+## Future Roadmap
+
+* Reddit complaint collection
+* Complaint detection
+* Problem extraction
+* Clustering engine
+* Opportunity scoring
+* Builder community
+* Live problem feed
+
+## Author
+
+Steny Mathew
