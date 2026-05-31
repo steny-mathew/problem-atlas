@@ -1,29 +1,46 @@
 function Hero() {
   return (
-    <div className="hero">
-      <h1>ProblemAtlas</h1>
+    <section className="hero">
 
-      <p>
-        Discover real problems people are facing online.
-      </p>
-
-      <div className="stats">
-        <div>
-          <h2>50K+</h2>
-          <span>Complaints Analyzed</span>
-        </div>
-
-        <div>
-          <h2>1,200</h2>
-          <span>Active Problems</span>
-        </div>
-
-        <div>
-          <h2>Daily</h2>
-          <span>Updates</span>
-        </div>
+      <div className="hero-background-word">
+        SIGNALS
       </div>
-    </div>
+
+      <div className="hero-content">
+
+        <div className="hero-left">
+          <h1 className="hero-title">
+            DISCOVER
+            <br />
+            PROBLEMS
+            <br />
+            WORTH
+            <br />
+            BUILDING
+            <br />
+            FOR
+          </h1>
+        </div>
+
+        <div className="hero-right">
+          <p className="hero-tag">
+            AI-Powered Opportunity Discovery
+          </p>
+
+          <p className="hero-description">
+            ProblemAtlas scans thousands of online complaints
+            and surfaces the world's most valuable unsolved
+            opportunities.
+          </p>
+
+          <button className="primary-btn">
+            Explore Opportunities →
+          </button>
+        </div>
+
+      </div>
+
+    </section>
   );
 }
 

@@ -5,8 +5,9 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f8fc;
+  font-family: Inter, Arial, sans-serif;
+  background: #0b1020;
+  color: white;
 }
 
 #root {

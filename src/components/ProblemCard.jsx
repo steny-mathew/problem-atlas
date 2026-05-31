@@ -1,39 +1,43 @@
 function ProblemCard({ problem }) {
   return (
     <div className="card">
-      <h2>{problem.title}</h2>
 
-      <p>
-        <strong>Mentions:</strong>{" "}
-        {problem.mentions}
-      </p>
+      <div className="card-top">
 
-      <p>
-        <strong>Growth:</strong>{" "}
-        +{problem.growth}%
-      </p>
+        <span className="card-category">
+          {problem.category}
+        </span>
 
-      <p>
-        <strong>Opportunity Score:</strong>{" "}
-        {problem.score}
-      </p>
+        <span className="card-score">
+          {problem.score}
+        </span>
 
-      <h4>Sample Complaints</h4>
-
-      <ul>
-        {problem.complaints.map(
-          (complaint, index) => (
-            <li key={index}>
-              {complaint}
-            </li>
-          )
-        )}
-      </ul>
-
-      <div className="buttons">
-        <button>View Details</button>
-        <button>I'm Building This</button>
       </div>
+
+      <h2 className="card-title">
+        {problem.title}
+      </h2>
+
+      <div className="card-metrics">
+
+        <span className="growth">
+          ↑ {problem.growth}% Growth
+        </span>
+
+        <span className="mentions">
+          {problem.mentions} Mentions
+        </span>
+
+      </div>
+
+      <p className="complaint-preview">
+        "{problem.complaints[0]}"
+      </p>
+
+      <button className="view-btn">
+        View Opportunity →
+      </button>
+
     </div>
   );
 }
