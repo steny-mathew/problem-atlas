@@ -9,17 +9,15 @@ function Hero() {
       <div className="hero-content">
 
         <div className="hero-left">
-          <h1 className="hero-title">
-            DISCOVER
-            <br />
-            PROBLEMS
-            <br />
-            WORTH
-            <br />
-            BUILDING
-            <br />
-            FOR
-          </h1>
+        <h1 className="hero-title">
+          DISCOVER
+          <br />
+          PROBLEMS
+
+          <span className="hero-accent">
+            Worth Building For
+          </span>
+        </h1>
         </div>
 
         <div className="hero-right">

@@ -6,7 +6,8 @@ import CategoryFilter from "./components/CategoryFilter";
 import ProblemCard from "./components/ProblemCard";
 import Navbar from "./components/Navbar";
 import TrendingSection from "./components/TrendingSection";
-
+import OpportunityDeck from "./components/OpportunityDeck";
+import ProblemAtlas from "./components/ProblemAtlas";
 import problems from "./data/problems";
 
 import "./App.css";
@@ -39,28 +40,30 @@ function App() {
     <div className="background-animation"></div>
       <Navbar />
       <Hero />
-      <TrendingSection />
-      <ProblemPulse />
+
+      <ProblemAtlas />
+
+      <OpportunityDeck />
       <section id="explorer" className="explorer-section">
 
-        <div className="explorer-header">
+      <div className="explorer-header">
 
-          <p className="section-tag">
-            DISCOVERY ENGINE
-          </p>
+        <p className="section-tag">
+          DISCOVERY ENGINE
+        </p>
 
-          <h2 className="explorer-title">
-            Explore Opportunities
-          </h2>
+        <h2 className="explorer-title">
+          Explore Opportunities
+        </h2>
 
-          <p className="explorer-description">
-            Search thousands of real-world complaints
-            transformed into actionable opportunities.
-          </p>
+        <p className="explorer-description">
+          Search thousands of real-world complaints
+          transformed into actionable opportunities.
+        </p>
 
-        </div>
+      </div>
 
-        </section>
+      </section>
         <div className="search-container">
           <input
             type="text"
