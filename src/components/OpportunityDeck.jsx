@@ -2,7 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import problems from "../data/problems";
 
-function OpportunityDeck() {
+function OpportunityDeck({
+  onExplore,
+}) {
   const [index, setIndex] = useState(0);
 
   const nextCard = () => {
@@ -85,7 +87,12 @@ function OpportunityDeck() {
               online communities.
             </p>
 
-            <button className="deck-explore">
+            <button
+              className="deck-explore"
+              onClick={() =>
+                onExplore(problem)
+              }
+            >
               Explore Opportunity →
             </button>
 

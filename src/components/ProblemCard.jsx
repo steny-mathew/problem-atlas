@@ -1,4 +1,7 @@
-function ProblemCard({ problem }) {
+function ProblemCard({
+  problem,
+  onExplore,
+}) {
   return (
     <div className="card">
 
@@ -34,8 +37,11 @@ function ProblemCard({ problem }) {
         "{problem.complaints[0]}"
       </p>
 
-      <button className="view-btn">
-        View Opportunity →
+      <button
+        className="details-btn"
+        onClick={onExplore}
+      >
+        Explore Opportunity
       </button>
 
     </div>

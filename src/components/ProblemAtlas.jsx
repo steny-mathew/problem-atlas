@@ -1,44 +1,32 @@
 const complaints = [
   {
     text: "Missed another internship deadline 😭",
-    top: "20px",
-    left: "50px",
-  },
-
-  {
-    text: "Too many internship portals",
-    top: "110px",
-    left: "1100px",
+    top: "5%",
+    left: "0%",
   },
 
   {
     text: "No response after applying",
-    top: "150px",
-    left: "120px",
+    top: "40%",
+    left: "0%",
   },
 
   {
     text: "Why do internships require experience?",
-    top: "300px",
-    left: "750px",
+    top: "60%",
+    left: "20%",
   },
 
   {
     text: "Freelancers wait forever for payment",
     top: "180px",
-    left: "520px",
-  },
-
-  {
-    text: "Clients disappear after project delivery",
-    top: "230px",
-    left: "1000px",
+    left: "40%",
   },
 
   {
     text: "Receipts always get lost",
-    top: "280px",
-    left: "300px",
+    top: "55%",
+    left: "70%",
   },
 
   {
@@ -49,26 +37,20 @@ const complaints = [
 
   {
     text: "Hospitals never sync schedules",
-    top: "60px",
-    left: "350px",
+    top: "10%",
+    left: "45%",
   },
 
   {
     text: "Doctor cancelled again",
     top: "320px",
-    left: "50px",
+    left: "0%",
   },
 
   {
     text: "Booking appointments takes forever",
     top: "330px",
     left: "500px",
-  },
-
-  {
-    text: "No reminders for appointments",
-    top: "360px",
-    left: "950px",
   },
 ];
 
