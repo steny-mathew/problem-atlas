@@ -31,9 +31,12 @@ function Hero() {
             opportunities.
           </p>
 
-          <button className="primary-btn">
-            Explore Opportunities →
-          </button>
+          <a
+            href="#explorer"
+            className="primary-btn"
+          >
+            Explore Opportunities
+          </a>
         </div>
 
       </div>

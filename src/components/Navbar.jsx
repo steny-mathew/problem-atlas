@@ -6,9 +6,8 @@ function Navbar() {
       </div>
 
       <div className="nav-links">
-        <a href="#trending">Trending</a>
-        <a href="#explorer">Explorer</a>
-        <a href="#builders">Builders</a>
+        <a href="#atlas">Trending</a>
+        <a href="#explorer">Explore</a>
       </div>
     </nav>
   );
