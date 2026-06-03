@@ -7,6 +7,7 @@ import ProblemCard from "../components/ProblemCard";
 import Navbar from "../components/Navbar";
 import OpportunityDeck from "../components/OpportunityDeck";
 import ProblemAtlas from "../components/ProblemAtlas";
+import About from "../components/About";
 
 import problems from "../data/problems";
 
@@ -53,7 +54,7 @@ function Home() {
       <Navbar />
 
       <Hero />
-
+      <About />
       <ProblemAtlas />
 
       <OpportunityDeck

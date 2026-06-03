@@ -1311,3 +1311,56 @@ body {
   }
 
 }
+.about-section {
+  padding: 90px 8%;
+
+  text-align: center;
+}
+.about-tag {
+  color: #8b5cf6;
+
+  letter-spacing: 4px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+.about-title {
+  font-size: clamp(42px, 5vw, 72px);
+
+  color: white;
+
+  margin: 5px 0;
+}
+.about-description {
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  color: rgba(255,255,255,.7);
+
+  font-size: 20px;
+}
+.about-content {
+  max-width: 900px;
+  margin: 60px auto 0;
+}
+.about-large-text {
+  font-size: clamp(32px, 4vw, 10px);
+  font-family:cursive;
+  line-height: 1.1;
+
+  color: white;
+
+  font-weight: 700;
+
+  margin-bottom: 30px;
+}
+.about-body {
+  font-size: 22px;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.7);
+}
+
