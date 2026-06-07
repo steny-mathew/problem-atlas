@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ProblemModal from "../components/ProblemModal";
 
@@ -9,8 +9,6 @@ import OpportunityDeck from "../components/OpportunityDeck";
 import ProblemAtlas from "../components/ProblemAtlas";
 import About from "../components/About";
 
-import problems from "../data/problems";
-
 import "../App.css";
 
 function Home() {
@@ -20,8 +18,20 @@ function Home() {
   const [searchTerm, setSearchTerm] =
     useState("");
 
+  const [problems, setProblems] = useState([]);
+
   const [selectedProblem, setSelectedProblem] =
     useState(null);
+    useEffect(() => {
+      fetch("http://localhost:3001/api/problems")
+        .then((res) => res.json())
+        .then((data) => {
+          setProblems(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, []);
 
   const categories = [
     "All",
