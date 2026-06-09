@@ -1,6 +1,4 @@
 const Opportunity = require("./models/Opportunity");
-const fetchHackerNewsPosts =
-  require("./collectors/hackerNewsCollector");
 const Problem = require("./models/Problem");
 const express = require("express");
 const cors = require("cors");
@@ -52,21 +50,7 @@ app.get("/seed", async (req, res) => {
 
   res.send("Database Seeded!");
 });
-app.get(
-  "/api/hackernews",
-  async (req, res) => {
-    try {
-      const posts =
-        await fetchHackerNewsPosts();
 
-      res.json(posts);
-    } catch (error) {
-      res.status(500).json({
-        message: error.message,
-      });
-    }
-  }
-);
 app.listen(3001, () => {
   console.log("Server running on port 3001");
 });
