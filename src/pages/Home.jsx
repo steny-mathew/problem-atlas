@@ -23,7 +23,7 @@ function Home() {
   const [selectedProblem, setSelectedProblem] =
     useState(null);
     useEffect(() => {
-      fetch("http://localhost:3001/api/opportunities")
+      fetch("https://problem-atlas-backend.onrender.com/api/opportunities")
         .then((res) => res.json())
         .then((data) => {
           setProblems(data);
