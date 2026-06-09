@@ -23,7 +23,7 @@ function Home() {
   const [selectedProblem, setSelectedProblem] =
     useState(null);
     useEffect(() => {
-      fetch("http://localhost:3001/api/problems")
+      fetch("http://localhost:3001/api/opportunities")
         .then((res) => res.json())
         .then((data) => {
           setProblems(data);

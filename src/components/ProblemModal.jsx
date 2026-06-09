@@ -24,60 +24,26 @@ function ProblemModal({
         </button>
 
         <p className="problem-tag">
-          {problem.category}
+          {problem.subreddit}
         </p>
 
         <h1>
           {problem.title}
         </h1>
 
-        <div className="modal-stats">
+        <h3>Source</h3>
 
-          <div>
-            <h2>{problem.score}</h2>
-            <span>
-              Opportunity Score
-            </span>
-          </div>
+        <p>{problem.source}</p>
 
-          <div>
-            <h2>
-              {problem.mentions}
-            </h2>
-            <span>
-              Mentions
-            </span>
-          </div>
+        <h3>Reddit Link</h3>
 
-          <div>
-            <h2>
-              +{problem.growth}%
-            </h2>
-            <span>
-              Growth
-            </span>
-          </div>
-
-        </div>
-
-        <h3>
-          Real Complaints
-        </h3>
-
-        <div className="modal-complaints">
-
-          {problem.complaints.map(
-            (complaint, index) => (
-              <div
-                key={index}
-                className="modal-complaint"
-              >
-                "{complaint}"
-              </div>
-            )
-          )}
-
-        </div>
+        <a
+          href={problem.url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open Original Post
+        </a>
 
       </div>
     </div>

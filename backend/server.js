@@ -1,3 +1,4 @@
+const Opportunity = require("./models/Opportunity");
 const fetchHackerNewsPosts =
   require("./collectors/hackerNewsCollector");
 const Problem = require("./models/Problem");
@@ -26,6 +27,18 @@ mongoose
       const problems = await Problem.find();
   
       res.json(problems);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
+  });
+  app.get("/api/opportunities", async (req, res) => {
+    try {
+      const opportunities =
+        await Opportunity.find();
+  
+      res.json(opportunities);
     } catch (error) {
       res.status(500).json({
         message: error.message,

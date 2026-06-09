@@ -8,11 +8,11 @@ function ProblemCard({
       <div className="card-top">
 
         <span className="card-category">
-          {problem.category}
+          {problem.subreddit || "Reddit"}
         </span>
 
         <span className="card-score">
-          {problem.score}
+          🚀
         </span>
 
       </div>
@@ -24,17 +24,13 @@ function ProblemCard({
       <div className="card-metrics">
 
         <span className="growth">
-          ↑ {problem.growth}% Growth
-        </span>
-
-        <span className="mentions">
-          {problem.mentions} Mentions
+          {problem.source}
         </span>
 
       </div>
 
       <p className="complaint-preview">
-        "{problem.complaints[0]}"
+        Opportunity discovered from Reddit
       </p>
 
       <button
