@@ -33,6 +33,7 @@ with sync_playwright() as p:
 
     page.wait_for_timeout(10000)
 
+    # Scroll to load more posts
     for i in range(5):
         page.mouse.wheel(0, 4000)
         page.wait_for_timeout(3000)
@@ -55,6 +56,7 @@ with sync_playwright() as p:
                 "href"
             )
 
+            # Check if already exists
             existing = collection.find_one(
                 {"url": url}
             )
@@ -62,8 +64,31 @@ with sync_playwright() as p:
             if existing:
                 continue
 
+            # Open post page
+            post_page = browser.new_page()
+
+            post_page.goto(
+                url,
+                wait_until="domcontentloaded",
+                timeout=60000
+            )
+
+            post_page.wait_for_timeout(5000)
+
+            try:
+                body = post_page.locator(
+                    "shreddit-post-text-body"
+                ).first.inner_text()
+
+            except:
+                body = ""
+
+            post_page.close()
+
+            # Save to MongoDB
             collection.insert_one({
                 "title": title,
+                "body": body,
                 "url": url,
                 "source": "reddit",
                 "subreddit": "SomebodyMakeThis"
@@ -71,10 +96,10 @@ with sync_playwright() as p:
 
             inserted += 1
 
-            print("Saved:", title)
+            print(f"Saved: {title}")
 
         except Exception as e:
-            print(e)
+            print(f"Error: {e}")
 
     print(
         f"\nInserted {inserted} new opportunities"
