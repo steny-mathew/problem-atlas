@@ -6,11 +6,23 @@ const opportunitySchema = new mongoose.Schema({
   url: String,
   source: String,
   subreddit: String,
-  upvotes: Number,
-  comments: Number,
+
+  isOpportunity: Boolean,
+
   category: String,
+
   summary: String,
-  score: Number,
+
+  demand: Number,
+
+  difficulty: Number,
+
+  businessPotential: Number,
+
+  opportunityScore: Number,
+
+  reasoning: String,
+
   createdAt: {
     type: Date,
     default: Date.now,
