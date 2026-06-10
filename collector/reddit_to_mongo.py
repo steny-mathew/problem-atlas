@@ -14,8 +14,15 @@ client = MongoClient(
 )
 
 db = client["problematlas"]
-
 collection = db["opportunities"]
+
+subreddits = [
+    "SomebodyMakeThis",
+    "AppIdeas",
+    "Startup_Ideas",
+    "SideProject",
+    "Entrepreneur"
+]
 
 with sync_playwright() as p:
 
@@ -23,86 +30,162 @@ with sync_playwright() as p:
         headless=False
     )
 
-    page = browser.new_page()
+    total_inserted = 0
 
-    page.goto(
-        "https://www.reddit.com/r/SomebodyMakeThis/",
-        wait_until="domcontentloaded",
-        timeout=60000
-    )
+    for subreddit in subreddits:
 
-    page.wait_for_timeout(10000)
+        print(
+            f"\n{'=' * 60}"
+        )
+        print(
+            f"SCRAPING r/{subreddit}"
+        )
+        print(
+            f"{'=' * 60}\n"
+        )
 
-    # Scroll to load more posts
-    for i in range(5):
-        page.mouse.wheel(0, 4000)
-        page.wait_for_timeout(3000)
-
-    titles = page.locator('a[slot="title"]')
-
-    count = titles.count()
-
-    print(f"Found {count} posts")
-
-    inserted = 0
-
-    for i in range(count):
+        page = browser.new_page()
 
         try:
 
-            title = titles.nth(i).inner_text()
-
-            url = titles.nth(i).get_attribute(
-                "href"
-            )
-
-            # Check if already exists
-            existing = collection.find_one(
-                {"url": url}
-            )
-
-            if existing:
-                continue
-
-            # Open post page
-            post_page = browser.new_page()
-
-            post_page.goto(
-                url,
+            page.goto(
+                f"https://www.reddit.com/r/{subreddit}/",
                 wait_until="domcontentloaded",
                 timeout=60000
             )
 
-            post_page.wait_for_timeout(5000)
+            page.wait_for_timeout(
+                10000
+            )
 
-            try:
-                body = post_page.locator(
-                    "shreddit-post-text-body"
-                ).first.inner_text()
+            for i in range(5):
+                page.mouse.wheel(
+                    0,
+                    4000
+                )
 
-            except:
-                body = ""
+                page.wait_for_timeout(
+                    3000
+                )
 
-            post_page.close()
+            titles = page.locator(
+                'a[slot="title"]'
+            )
 
-            # Save to MongoDB
-            collection.insert_one({
-                "title": title,
-                "body": body,
-                "url": url,
-                "source": "reddit",
-                "subreddit": "SomebodyMakeThis"
-            })
+            count = titles.count()
 
-            inserted += 1
+            print(
+                f"Found {count} posts"
+            )
 
-            print(f"Saved: {title}")
+            subreddit_inserted = 0
+
+            for i in range(count):
+
+                try:
+
+                    title = titles.nth(
+                        i
+                    ).inner_text()
+
+                    url = titles.nth(
+                        i
+                    ).get_attribute(
+                        "href"
+                    )
+
+                    if not url:
+                        continue
+
+                    existing = (
+                        collection.find_one(
+                            {"url": url}
+                        )
+                    )
+
+                    if existing:
+                        continue
+
+                    post_page = (
+                        browser.new_page()
+                    )
+
+                    try:
+
+                        post_page.goto(
+                            url,
+                            wait_until="domcontentloaded",
+                            timeout=60000
+                        )
+
+                        post_page.wait_for_timeout(
+                            5000
+                        )
+
+                        try:
+
+                            body = (
+                                post_page
+                                .locator(
+                                    "shreddit-post-text-body"
+                                )
+                                .first
+                                .inner_text()
+                            )
+
+                        except:
+
+                            body = ""
+
+                    finally:
+
+                        post_page.close()
+
+                    collection.insert_one({
+                        "title": title,
+                        "body": body,
+                        "url": url,
+                        "source": "reddit",
+                        "subreddit": subreddit
+                    })
+
+                    subreddit_inserted += 1
+                    total_inserted += 1
+
+                    print(
+                        f"Saved: {title}"
+                    )
+
+                except Exception as e:
+
+                    print(
+                        f"Post Error: {e}"
+                    )
+
+            print(
+                f"\nInserted {subreddit_inserted} new posts from r/{subreddit}"
+            )
 
         except Exception as e:
-            print(f"Error: {e}")
+
+            print(
+                f"Subreddit Error: {e}"
+            )
+
+        finally:
+
+            page.close()
 
     print(
-        f"\nInserted {inserted} new opportunities"
+        f"\n{'=' * 60}"
+    )
+
+    print(
+        f"TOTAL NEW OPPORTUNITIES: {total_inserted}"
+    )
+
+    print(
+        f"{'=' * 60}\n"
     )
 
     browser.close()
