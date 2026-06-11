@@ -5,6 +5,29 @@ function ProblemModal({
 }) {
   if (!isOpen || !problem) return null;
 
+  const isPresentText = (value) =>
+    value &&
+    String(value).toLowerCase() !==
+      "undefined" &&
+    String(value).toLowerCase() !== "null";
+
+  const category =
+    isPresentText(problem?.category)
+      ? problem.category
+      : "Analyzing...";
+
+  const title =
+    problem?.title || "Untitled opportunity";
+
+  const summary =
+    problem?.summary || "AI analysis pending...";
+
+  const reasoning =
+    problem?.reasoning || "AI analysis pending...";
+
+  const formatMetric = (value) =>
+    value ?? "-";
+
   return (
     <div
       className="modal-overlay"
@@ -24,26 +47,49 @@ function ProblemModal({
         </button>
 
         <p className="problem-tag">
-          {problem.subreddit}
+          {category}
         </p>
 
         <h1>
-          {problem.title}
+          {title}
         </h1>
 
-        <h3>Source</h3>
+        <div className="modal-stats">
+          <div className="modal-stat">
+            <span>Demand</span>
+            <strong>
+              {formatMetric(problem?.demand)}
+            </strong>
+          </div>
 
-        <p>{problem.source}</p>
+          <div className="modal-stat">
+            <span>Difficulty</span>
+            <strong>
+              {formatMetric(problem?.difficulty)}
+            </strong>
+          </div>
 
-        <h3>Reddit Link</h3>
+          <div className="modal-stat">
+            <span>Business Potential</span>
+            <strong>
+              {formatMetric(
+                problem?.businessPotential
+              )}
+            </strong>
+          </div>
+        </div>
 
-        <a
-          href={problem.url}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open Original Post
-        </a>
+        <section className="modal-section">
+          <h3>Summary</h3>
+
+          <p>{summary}</p>
+        </section>
+
+        <section className="modal-section">
+          <h3>AI Reasoning</h3>
+
+          <p>{reasoning}</p>
+        </section>
 
       </div>
     </div>

@@ -626,18 +626,6 @@ body {
   min-height: 80px;
   margin: 0;
 }
-.card-metrics {
-  display: flex;
-
-  gap: 20px;
-
-  color: #94a3b8;
-
-  font-size: 14px;
-}
-.growth {
-  color: #22c55e;
-}
 .complaint-preview {
   color: #cbd5e1;
 
@@ -664,6 +652,19 @@ body {
   padding: 0;
 
   text-align: left;
+}
+.card-summary {
+  flex: 1;
+  font-style: normal;
+}
+
+.opportunity-state {
+  color: #cbd5e1;
+  padding: 24px 0;
+}
+
+.opportunity-error {
+  color: #fca5a5;
 }
 .deck-section {
   padding: 70px 8%;
@@ -1272,9 +1273,46 @@ body {
 .modal-stats {
   display: flex;
 
-  gap: 40px;
+  gap: 16px;
 
   margin: 40px 0;
+
+  flex-wrap: wrap;
+}
+.modal-stat {
+  flex: 1;
+  min-width: 170px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.modal-stat span {
+  display: block;
+  color: #94a3b8;
+  font-size: 13px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.modal-stat strong {
+  color: white;
+  font-size: 28px;
+}
+
+.modal-section {
+  margin-top: 28px;
+}
+
+.modal-section h3 {
+  color: #c084fc;
+  margin-bottom: 12px;
+}
+
+.modal-section p {
+  color: #cbd5e1;
+  line-height: 1.7;
 }
 .modal-complaints {
   display: grid;
@@ -1363,4 +1401,3 @@ body {
 
   color: rgba(255,255,255,.7);
 }
-

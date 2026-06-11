@@ -34,12 +34,16 @@ mongoose
   app.get("/api/opportunities", async (req, res) => {
     try {
       const opportunities =
-        await Opportunity.find();
+        await Opportunity.find()
+          .sort({ opportunityScore: -1 });
   
       res.json(opportunities);
     } catch (error) {
+      console.error("Failed to fetch opportunities:", error);
+
       res.status(500).json({
-        message: error.message,
+        message:
+          "Unable to fetch opportunities right now.",
       });
     }
   });

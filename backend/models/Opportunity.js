@@ -23,6 +23,11 @@ const opportunitySchema = new mongoose.Schema({
 
   reasoning: String,
 
+  aiProcessed: {
+    type: Boolean,
+    default: false,
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

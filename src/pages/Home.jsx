@@ -18,40 +18,87 @@ function Home() {
   const [searchTerm, setSearchTerm] =
     useState("");
 
-  const [problems, setProblems] = useState([]);
+  const [opportunities, setOpportunities] =
+    useState([]);
+
+  const [isLoading, setIsLoading] =
+    useState(true);
+
+  const [errorMessage, setErrorMessage] =
+    useState("");
 
   const [selectedProblem, setSelectedProblem] =
     useState(null);
-    useEffect(() => {
-      fetch("https://problem-atlas-backend.onrender.com/api/opportunities")
-        .then((res) => res.json())
-        .then((data) => {
-          setProblems(data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }, []);
+
+  const isPresentCategory = (category) =>
+    category &&
+    String(category).toLowerCase() !==
+      "undefined" &&
+    String(category).toLowerCase() !== "null";
+
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const response = await fetch(
+          "/api/opportunities"
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Failed to fetch opportunities."
+          );
+        }
+
+        const data = await response.json();
+
+        setOpportunities(
+          Array.isArray(data) ? data : []
+        );
+      } catch (error) {
+        console.error(error);
+
+        setErrorMessage(
+          "We could not load opportunities right now. Please try again later."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchOpportunities();
+  }, []);
 
   const categories = [
     "All",
-    "Career",
-    "Healthcare",
-    "Finance",
+    ...new Set(
+      opportunities
+        .map((opportunity) =>
+          opportunity?.category
+        )
+        .filter(isPresentCategory)
+    ),
   ];
 
-  const filteredProblems = problems.filter(
-    (problem) => {
+  const filteredOpportunities = opportunities.filter(
+    (opportunity) => {
       const categoryMatch =
         selectedCategory === "All" ||
-        problem.category === selectedCategory;
+        opportunity?.category === selectedCategory;
+
+      const title =
+        opportunity?.title?.toLowerCase() || "";
+
+      const summary =
+        opportunity?.summary?.toLowerCase() || "";
+
+      const query = searchTerm.toLowerCase();
 
       const searchMatch =
-        problem.title
-          .toLowerCase()
-          .includes(
-            searchTerm.toLowerCase()
-          );
+        title.includes(query) ||
+        summary.includes(query);
 
       return categoryMatch && searchMatch;
     }
@@ -133,21 +180,39 @@ function Home() {
             )}
           </div>
 
-          <div className="cards">
-            {filteredProblems.map(
-              (problem) => (
-                <ProblemCard
-                  key={problem.id}
-                  problem={problem}
-                  onExplore={() =>
-                    setSelectedProblem(
-                      problem
-                    )
-                  }
-                />
-              )
-            )}
-          </div>
+          {isLoading && (
+            <p className="opportunity-state">
+              Loading opportunities...
+            </p>
+          )}
+
+          {!isLoading && errorMessage && (
+            <p className="opportunity-state opportunity-error">
+              {errorMessage}
+            </p>
+          )}
+
+          {!isLoading && !errorMessage && (
+            <div className="cards">
+              {filteredOpportunities.map(
+                (opportunity, index) => (
+                  <ProblemCard
+                    key={
+                      opportunity?._id ||
+                      opportunity?.id ||
+                      index
+                    }
+                    problem={opportunity}
+                    onExplore={() =>
+                      setSelectedProblem(
+                        opportunity
+                      )
+                    }
+                  />
+                )
+              )}
+            </div>
+          )}
 
         </div>
       </div>
