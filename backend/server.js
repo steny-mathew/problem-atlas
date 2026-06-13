@@ -20,33 +20,44 @@ mongoose
     console.log(err);
   });
 
-  app.get("/api/problems", async (req, res) => {
-    try {
-      const problems = await Problem.find();
-  
-      res.json(problems);
-    } catch (error) {
-      res.status(500).json({
-        message: error.message,
-      });
-    }
-  });
-  app.get("/api/opportunities", async (req, res) => {
-    try {
-      const opportunities =
-        await Opportunity.find()
-          .sort({ opportunityScore: -1 });
-  
-      res.json(opportunities);
-    } catch (error) {
-      console.error("Failed to fetch opportunities:", error);
+app.get("/api/problems", async (req, res) => {
+  try {
+    const problems = await Problem.find();
 
-      res.status(500).json({
-        message:
-          "Unable to fetch opportunities right now.",
+    res.json(problems);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+app.get("/api/opportunities", async (req, res) => {
+  try {
+
+    const opportunities =
+      await Opportunity.find({
+        aiProcessed: true,
+        isOpportunity: true
       });
-    }
-  });
+
+    res.json(opportunities);
+
+  } catch (error) {
+
+    console.error(
+      "Failed to fetch opportunities:",
+      error
+    );
+
+    res.status(500).json({
+      message:
+        "Unable to fetch opportunities right now."
+    });
+
+  }
+});
+
 app.get("/seed", async (req, res) => {
   await Problem.deleteMany({});
 
