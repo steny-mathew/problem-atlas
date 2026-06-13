@@ -5,20 +5,16 @@ import certifi
 from bson import ObjectId
 from dotenv import load_dotenv
 from pymongo import MongoClient
-import google.generativeai as genai
+from groq import Groq
 
 load_dotenv()
 
 # -------------------------
-# Gemini Setup
+# Groq Setup
 # -------------------------
 
-genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
-
-model = genai.GenerativeModel(
-    "gemini-2.5-flash"
+groq_client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 # -------------------------
@@ -125,13 +121,22 @@ def process_batch(opportunities):
 
     prompt = build_prompt(opportunities)
 
-    print("\nSending batch to Gemini...")
+    print("\nSending batch to Groq...")
 
     try:
 
-        response = model.generate_content(prompt)
+        response = groq_client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.2
+        )
 
-        text = response.text.strip()
+        text = response.choices[0].message.content.strip()
 
         if text.startswith("```json"):
             text = (
@@ -145,7 +150,7 @@ def process_batch(opportunities):
 
     except Exception as e:
 
-        print(f"Gemini Error: {e}")
+        print(f"Groq Error: {e}")
 
         return 0
 
@@ -245,7 +250,6 @@ while True:
 
     print(f"Updated {updated} in this batch.")
 
-    # Check if more remain before waiting
     remaining = collection.count_documents(
         {
             "aiProcessed": {
@@ -264,7 +268,7 @@ while True:
 
     print(
         f"{remaining} remaining. "
-        f"Waiting 60 seconds before next batch..."
+        f"Waiting 15 seconds before next batch..."
     )
 
-    time.sleep(60)
+    time.sleep(15)

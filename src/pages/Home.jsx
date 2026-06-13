@@ -12,8 +12,6 @@ import About from "../components/About";
 import "../App.css";
 
 function Home() {
-  const [selectedCategory, setSelectedCategory] =
-    useState("All");
 
   const [searchTerm, setSearchTerm] =
     useState("");
@@ -71,39 +69,24 @@ function Home() {
     fetchOpportunities();
   }, []);
 
-  const categories = [
-    "All",
-    ...new Set(
-      opportunities
-        .map((opportunity) =>
-          opportunity?.category
-        )
-        .filter(isPresentCategory)
-    ),
-  ];
 
   const filteredOpportunities = opportunities.filter(
     (opportunity) => {
-      const categoryMatch =
-        selectedCategory === "All" ||
-        opportunity?.category === selectedCategory;
-
+  
       const title =
         opportunity?.title?.toLowerCase() || "";
-
+  
       const summary =
         opportunity?.summary?.toLowerCase() || "";
-
+  
       const query = searchTerm.toLowerCase();
-
-      const searchMatch =
+  
+      return (
         title.includes(query) ||
-        summary.includes(query);
-
-      return categoryMatch && searchMatch;
+        summary.includes(query)
+      );
     }
   );
-
   return (
     <>
       <div className="background-animation"></div>
@@ -156,29 +139,6 @@ function Home() {
 
       <div className="layout">
         <div className="explorer-content">
-
-          <div className="category-pills">
-            {categories.map(
-              (category) => (
-                <button
-                  key={category}
-                  className={
-                    selectedCategory ===
-                    category
-                      ? "pill active-pill"
-                      : "pill"
-                  }
-                  onClick={() =>
-                    setSelectedCategory(
-                      category
-                    )
-                  }
-                >
-                  {category}
-                </button>
-              )
-            )}
-          </div>
 
           {isLoading && (
             <p className="opportunity-state">
