@@ -5,7 +5,6 @@ import ProblemModal from "../components/ProblemModal";
 import Hero from "../components/Hero";
 import ProblemCard from "../components/ProblemCard";
 import Navbar from "../components/Navbar";
-import OpportunityDeck from "../components/OpportunityDeck";
 import ProblemAtlas from "../components/ProblemAtlas";
 import About from "../components/About";
 
@@ -96,12 +95,6 @@ function Home() {
       <Hero />
       <About />
       <ProblemAtlas />
-
-      <OpportunityDeck
-        onExplore={(problem) =>
-          setSelectedProblem(problem)
-        }
-      />
 
       <section
         id="explorer"
