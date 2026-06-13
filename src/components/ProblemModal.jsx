@@ -17,7 +17,7 @@ function ProblemModal({
       : "Analyzing...";
 
   const title =
-    problem?.title || "Untitled opportunity";
+    problem?.productTitle || "Untitled opportunity";
 
   const summary =
     problem?.summary || "AI analysis pending...";

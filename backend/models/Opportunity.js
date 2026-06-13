@@ -8,7 +8,7 @@ const opportunitySchema = new mongoose.Schema({
   subreddit: String,
 
   isOpportunity: Boolean,
-
+  productTitle: String,
   category: String,
 
   summary: String,

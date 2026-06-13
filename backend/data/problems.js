@@ -1,7 +1,7 @@
 const problems = [
   {
     id: 1,
-    title: "Internship Tracking",
+    productTitle: "Internship Tracking",
     category: "Career",
     mentions: 8230,
     growth: 34,
@@ -14,7 +14,7 @@ const problems = [
 
   {
     id: 2,
-    title: "Doctor Appointment Booking",
+    productTitle: "Doctor Appointment Booking",
     category: "Healthcare",
     mentions: 6500,
     growth: 22,
@@ -27,7 +27,7 @@ const problems = [
 
   {
     id: 3,
-    title: "Expense Categorization",
+    productTitle: "Expense Categorization",
     category: "Finance",
     mentions: 4900,
     growth: 18,

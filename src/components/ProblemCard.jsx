@@ -16,8 +16,10 @@ function ProblemCard({
   const score =
     problem?.opportunityScore ?? "...";
 
-  const title =
-    problem?.title || "Untitled opportunity";
+    const title =
+    problem?.productTitle ||
+    problem?.title ||
+    "Untitled opportunity";
 
   const summary =
     problem?.summary || "AI analysis pending...";

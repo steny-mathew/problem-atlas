@@ -79,7 +79,7 @@ function OpportunityDeck({
             </div>
 
             <h3 className="deck-problem-title">
-              {problem.title}
+              {problem.Producttitle}
             </h3>
 
             <p className="deck-mentions">

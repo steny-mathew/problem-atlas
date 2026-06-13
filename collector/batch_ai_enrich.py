@@ -58,15 +58,26 @@ For each opportunity determine:
      programming question,
      or not a business opportunity.
 
-2. category
+2. productTitle
+   A short, clean 2-5 word product/solution name
+   derived from what the user is asking for.
+   Should sound like a real app or tool name.
+   Examples:
+     "Plant Watering Tracker"
+     "AI Meeting Summarizer"
+     "Freelancer Invoice Manager"
+   Do NOT use the raw Reddit post title.
+   Do NOT start with "A" or "An".
 
-3. summary
+3. category
+
+4. summary
    (1 sentence)
 
-4. opportunityScore
+5. opportunityScore
    (1-10)
 
-5. reasoning
+6. reasoning
    (1 short sentence)
 
 Return ONLY valid JSON.
@@ -77,6 +88,7 @@ Format:
   {
     "id": "mongodb_id",
     "isOpportunity": true,
+    "productTitle": "Plant Watering Tracker",
     "category": "Productivity",
     "summary": "Short summary",
     "opportunityScore": 8,
@@ -175,6 +187,12 @@ def process_batch(opportunities):
                                 False
                             ),
 
+                        "productTitle":
+                            result.get(
+                                "productTitle",
+                                ""
+                            ),
+
                         "category":
                             result.get(
                                 "category",
@@ -268,7 +286,7 @@ while True:
 
     print(
         f"{remaining} remaining. "
-        f"Waiting 15 seconds before next batch..."
+        f"Waiting 10 seconds before next batch..."
     )
 
-    time.sleep(15)
+    time.sleep(10)

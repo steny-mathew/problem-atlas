@@ -1,9 +1,13 @@
-from pymongo import MongoClient
-from dotenv import load_dotenv
 import os
 import certifi
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
 load_dotenv()
+
+# -------------------------
+# MongoDB Setup
+# -------------------------
 
 client = MongoClient(
     os.getenv("MONGO_URI"),
@@ -11,12 +15,23 @@ client = MongoClient(
 )
 
 db = client["problematlas"]
+
 collection = db["opportunities"]
 
-result = collection.delete_many({
-    "source": "stackoverflow"
-})
+# -------------------------
+# Reset aiProcessed
+# -------------------------
+
+result = collection.update_many(
+    {
+        "aiProcessed": True
+    },
+    {
+        "$set": {
+            "aiProcessed": False
+        }
+    }
+)
 
 print(
-    f"Deleted {result.deleted_count} documents"
-)
+    f"Reset {result.modified_count} documents to aiProcessed: False")
