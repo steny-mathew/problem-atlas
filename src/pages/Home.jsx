@@ -40,7 +40,7 @@ function Home() {
         setErrorMessage("");
 
         const response = await fetch(
-          "/api/opportunities"
+          "https://problem-atlas-backend.onrender.com/api/opportunities"
         );
 
         if (!response.ok) {

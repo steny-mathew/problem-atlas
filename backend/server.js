@@ -1,5 +1,4 @@
 const Opportunity = require("./models/Opportunity");
-const Problem = require("./models/Problem");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
